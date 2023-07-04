@@ -1,5 +1,5 @@
 {
-  "name": "s5-encrypt-wasm",
+  "name": "s5-encryptWasm",
   "version": "0.1.0-beta1",
   "description": "S5 encypt-wasm for S5 Javascript Client",
   "main": "dist/cjs/src/index.js",
@@ -46,7 +46,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/parajbs-dev/s5-encrypt-wasm.git"
+    "url": "git+https://github.com/Fabstir/s5-encryptWasm.git"
   },
   "keywords": [
     "Decentralised",
@@ -54,12 +54,12 @@
     "Cloud Storage",
     "S5"
   ],
-  "author": "parajbs-dev",
+  "author": "Fabstir",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/parajbs-dev/s5-encrypt-wasm/issues"
+    "url": "https://github.com/Fabstir/s5-encryptWasm/issues"
   },
-  "homepage": "https://github.com/parajbs-dev/s5-encrypt-wasm",
+  "homepage": "https://github.com/Fabstir/s5-encryptWasm",
   "dependencies": {
     "@noble/hashes": "^1.3.1",
     "axios": "^1.4.0",
