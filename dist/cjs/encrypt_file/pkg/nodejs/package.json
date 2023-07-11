@@ -12,9 +12,6 @@
     "encrypt_file.js",
     "encrypt_file.d.ts"
   ],
-  "module": "encrypt_file.js",
-  "types": "encrypt_file.d.ts",
-  "sideEffects": [
-    "./snippets/*"
-  ]
+  "main": "encrypt_file.js",
+  "types": "encrypt_file.d.ts"
 }
