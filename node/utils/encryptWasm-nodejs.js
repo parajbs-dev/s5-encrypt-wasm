@@ -4,7 +4,7 @@ const fs = require("fs");
 const process = require("process");
 const { Buffer } = require("buffer");
 const { Blake3Hasher } = require("@napi-rs/blake-hash");
-const { Transform } = require("readable-stream");
+const { Transform, Readable } = require("readable-stream");
 
 const {
   encrypt_file_xchacha20,
@@ -72,7 +72,9 @@ function getEncryptedStreamReader(filePath, encryptedKey) {
  */
 async function calculateB3hashFromFile(path) {
   // Create a readable stream from the file
-  const stream = fs.createReadStream(path);
+  const stream = new Readable({ read() {/**/} });
+  stream.push(path);
+  stream.push(null);
 
   // Create an instance of Blake3Hasher
   const hasher = new Blake3Hasher();
@@ -201,12 +203,8 @@ async function encryptFile(file, filename, encryptedKey, cid) {
     // Convert Uint8Array to Buffer
     const encryptedFileBuffer = encryptedFileBytes;
 
-    // Create a writable stream to save the encrypted file
-    const encryptedFilePath = `tmp/${filename}`;
-    await fs.promises.writeFile(encryptedFilePath, encryptedFileBuffer);
-
     // Calculate the B3 hash of the encrypted file
-    const b3hash = await calculateB3hashFromFile(encryptedFilePath);
+    const b3hash = await calculateB3hashFromFile(encryptedFileBuffer);
 
     // Construct the encrypted blob hash
     const encryptedBlobHash = Buffer.concat([Buffer.alloc(1, mhashBlake3Default), b3hash]);
@@ -227,7 +225,7 @@ async function encryptFile(file, filename, encryptedKey, cid) {
     const encryptedCid = "u" + Buffer.from(encryptedCidBytes).toString("base64").replace(/\+/g, "-").replace(/\//g, "_").replace("=", "");
 
     return {
-      encryptedFile: encryptedFilePath,
+      encryptedFile: Buffer.from(encryptedFileBuffer),
       encryptedCid,
     };
   } catch (error) {

@@ -1,6 +1,6 @@
 {
   "name": "s5-encryptWasm",
-  "version": "0.1.0-beta1c2",
+  "version": "0.1.0-beta1c3",
   "description": "S5 encypt-wasm for S5 Javascript Client",
   "main": "dist/cjs/node/index.js",
   "types": "dist/mjs/src/index.d.ts",
@@ -20,9 +20,8 @@
     "not OperaMini all"
   ],
   "scripts": {
-    "build": "rimraf dist && tsc --project tsconfig.build.json && tsc --project tsconfig.build.commonjs.json && yarn copy-files",
+    "build": "rimraf dist && tsc --project tsconfig.build.json && tsc --project tsconfig.build.cjs.json && yarn copy-files",
     "copy-files-cjs": "copyfiles -u 1 encrypt_file/pkg/nodejs/* dist/cjs/encrypt_file/",
-    "copy-files-cjs-web": "copyfiles -u 1 encrypt_file/pkg/web/* dist/cjs/encrypt_file/",
     "copy-files-mjs": "copyfiles -u 1 encrypt_file/pkg/web/* dist/mjs/encrypt_file/",
     "copy-files": "yarn copy-files-cjs && yarn copy-files-mjs",
     "lint": "yarn lint:tsc && yarn lint:eslint",
@@ -34,7 +33,7 @@
     "args": "echo second $1 first $0 all $@",
     "webpack": "npx webpack --config ./webpack.config.js ",
     "webpack-slim": "npx webpack --config ./webpack.slim.config.js",
-    "wasm-pack": "cd encrypt_file && wasm-pack build --target web -d pkg/web && wasm-pack build --target nodejs -d pkg/nodejs"
+    "wasm-pack": "cd encrypt_file && wasm-pack build --target web -d pkg/web && wasm-pack build --target nodejs -d pkg/nodejs && rimraf target"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

@@ -1,7 +1,22 @@
 {
-  "extends": "./tsconfig.build.json",
   "compilerOptions": {
     "module": "commonjs",
-    "outDir": "dist/cjs"
-  }
+    "outDir": "dist/cjs",
+    "esModuleInterop": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "declaration": true,
+    "declarationMap": true,
+    "isolatedModules": true,
+    "allowJs" : true,
+
+    "lib": ["dom", "es2020"],
+    "target": "es2020",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "types": ["node"],
+    "typeRoots": ["./types", "./node_modules/@types"]
+  },
+  "include": ["node", "encrypt_file/pkg/nodejs/*.js", "types/**/*.d.ts"],
+  "exclude": ["src/**/*.test.ts"]
 }
